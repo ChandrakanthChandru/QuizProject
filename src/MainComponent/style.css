@@ -1,0 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Courgette&family=Licorice&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Cinzel", serif;
+}
+
+.home {
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    padding: 10px;
+    background-color: #5A2A27;
+    border: none;
+    text-decoration: none;
+
+}
+
+.home div h1 {
+    color: aqua;
+}
+
+a {
+    text-decoration: none;
+}
+
+.home>div>a>button {
+    margin-right: 10px;
+    width: 80px;
+    height: 25px;
+    font-size: 18px;
+    font-family: "Cinzel", serif;
+    border-radius: 6px;
+    border: none;
+    padding-bottom: .2rem;
+}
+
+.home>div>button:active {
+    color: red;
+    box-shadow: 1px 1px 5px 1px rgb(239, 238, 238);
+}
+
+.welcome>section {
+    background: linear-gradient(#5A2A27, #5A2A27, #9A4D42);
+    height: calc(100vh - 50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border: 8px white;
+}
+
+.welcome>section>a>button {
+    height: 30px;
+    width: 100px;
+    border-radius: 3px;
+    border: none;
+}
+
+.welcome>section>a>button:hover {
+    background-color: rgb(103, 84, 27);
+    color: white;
+}
+
+.welcome>section>h1 {
+    color: rgb(150, 160, 164);
+    
+}
+
+/* Sign up Page */
+.signup {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 100px;
+    /* background: linear-gradient(#5A2A27, #5A2A27, #9A4D42); */
+}
+
+.signup>h1 {
+    color: rgb(95, 7, 21);
+    margin-bottom: 10px;
+}
+
+.signup>form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    height: 250px;
+    background:linear-gradient(#871d0d,#822e21) ;
+    border-radius: 10px;
+}
+
+.signup>form input {
+    font-size: large;
+    text-align: center;
+    border-radius: 3px;
+    font-family: "Lora", serif;
+    border: none;
+    height: 40px;
+    width: 300px;
+}
+
+.signup>form input::placeholder {
+    font-family: "Cinzel", serif;
+    text-align: center;
+    text-decoration: solid;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.signup form>#submit {
+    width: 100px;
+    height: 30px;
+}
+.signup form input:disabled{
+    background: #fff;
+    color: rgb(214, 202, 202);
+}
+
+#submit:hover {
+    color: rgb(255, 248, 248);
+    background-color: rgb(219, 118, 72);
+}
+
+
+/* Log in CSS*/
+.login {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: linear-gradient(#5A2A27, #5A2A27, #9A4D42); */
+
+
+}
+
+.login>h1 {
+    color: rgb(20, 33, 94);
+    margin-bottom: 10px;
+}
+
+.login>form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 10px;
+    padding: 30px;
+    height: 250px;
+    margin-bottom: 100px;
+    background: linear-gradient(#9A4D42, #5A2A27);
+
+}
+
+.login>form input {
+    font-size: large;
+    font-family: "Lora", serif;
+    text-align: center;
+    border-radius: 3px;
+    border: none;
+    height: 40px;
+    width: 300px;
+}
+
+.login>form input::placeholder {
+    text-align: center;
+    text-decoration: solid;
+    font-weight: 600;
+    font-size: 17px;
+    font-family: "Cinzel", serif;
+}
+
+.login form>#submit {
+    width: 100px;
+    height: 30px;
+    /* margin-bottom: 100px; */
+}
