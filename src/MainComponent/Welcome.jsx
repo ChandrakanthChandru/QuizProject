@@ -9,7 +9,7 @@ const Welcome = () => {
   return (
     <div className='welcome' >
         <section>
-            <h1>{user && user.name} Welcome To Quizz Application🧠</h1>
+            <h1>{user && user.name} Welcome To Quiz Application🧠</h1>
             { user && (
               <Link to="/quiz"><button>Start Quiz</button></Link>
             )}

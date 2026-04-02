@@ -1,5 +1,5 @@
 import React,{createContext, useContext, useState} from 'react'
-import {questions} from './quesitons.json';
+import {questions} from './questions.json';
 import Router from './Router';
 
 

@@ -4,31 +4,34 @@ import { MyContext } from '../Context'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Quiz = () => {
-    let[timer, setTimer]=useState(3000);
     let navigate=useNavigate();
-    useEffect(()=>{
+    let [timer, setTimer] = useState(300); // 5 minutes
 
-        if(timer == 0){
-            
-            navigate("/result")
+    useEffect(() => {
+        if (timer <= 0) {
+            navigate("/result");
             return;
         }
 
-       let interval= setInterval(()=>{
-        setTimer(timer - 1)
-        },1000)
+        const interval = setInterval(() => {
+            setTimer((prev) => prev - 1);
+        }, 1000);
 
-        return()=>{
-            clearInterval(interval);
-        };
-    },[timer])
+        return () => clearInterval(interval);
+    }, [timer, navigate]);
 
-    
     let [data, setData, index, setIndex, user, setUser] = useContext(MyContext)
 
-    let allValues=useContext(MyContext);
-    let userName= allValues[4]
-    console.log(userName.name);
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        }
+    }, [user, navigate]);
+
+    if (!user) return null;
+
+    let userName = user;
+    // console.log(userName.name);
     
 
     // console.log(data, index);
@@ -58,71 +61,77 @@ const Quiz = () => {
 
             <main>
 
-                <div className="q">
-                    <h1>Question</h1><br />
-                    <h2>{oneQuest.id}.{oneQuest.question}</h2>
-                </div>
+                <div className="quiz-content">
+                    <div className="q">
+                        <h1>Question</h1><br />
+                        <h2>{oneQuest.id}.{oneQuest.question}</h2>
+                    </div>
 
-                <div className="o"><h3>Choose the Correct Answer</h3><br />
+                    <div className="o">
+                        <h3>Choose the Correct Answer</h3><br />
+                        <h4>{
+                            oneQuest.options.map((e, i) => {
+                                return (
+                                    <div key={i}>
+                                        <input
+                                            type="radio"
+                                            name="ans"
+                                            id={`option-${i}`}
+                                            value={e}
+                                            onChange={handleInput}
+                                            checked={oneQuest.YourAnswer == e ? true : false}
+                                        />
+                                        <label htmlFor={`option-${i}`}>{e}</label>
+                                    </div>
+                                )
+                            })
+                        }</h4>
+                    </div>
 
-                    <h4>{
-                        oneQuest.options.map((e, i) => {
-                            return (
-                                <div key={i}>
-                                    <input
-                                        type="radio"
-                                        name="ans"
-                                        id=""
-                                        value={e}
-                                        onChange={handleInput}
-                                        checked={oneQuest.YourAnswer == e?true:false}
-                                    />
-                                    <label htmlFor="">{e}</label>
-                                </div>
-                            )
-                        })
-                    }</h4>
-
-                </div>
-                <div className="b">{data.map((e, i) => {
-                    return <button key={e.id} onClick={() => {
-                        setIndex(i)
-                    }}>{e.id}</button>
-                })
-                }</div>
-
-            </main>
-
-            <footer>
-
-                <div>
-                    <div className="right">
+                    <div className="nav-buttons">
                         <button onClick={() => {
                             if (index > 0) {
                                 setIndex(index - 1)
                             }
-                        }}>Previous Question</button>
+                        }}>Previous</button>
 
                         <button onClick={() => {
                             if (index < data.length - 1) {
                                 setIndex(index + 1)
                             }
-                        }}>Next Qustion</button>
+                        }}>Next</button>
                     </div>
-                    <div className="inner"><button onClick={
-                        ()=>{
-                            let confirmation= confirm("Are You Really Want To Submit")
-                            console.log(confirmation);
-
-                            if(confirmation){
-                                navigate("/result")
-                            }
-                        }
-                    }>Submit</button></div>
                 </div>
 
+                <aside className="quiz-sidebar">
+                    <div className="matrix-container">
+                        <h3>Questions</h3>
+                        <div className="b">
+                            {data.map((e, i) => (
+                                <button
+                                    key={e.id}
+                                    className={index === i ? 'active' : ''}
+                                    onClick={() => setIndex(i)}
+                                >
+                                    {e.id}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
 
-            </footer>
+                    <div className="submit-container">
+                        <button className="submit-btn" onClick={() => {
+                            let confirmation = confirm("Are You Really Want To Submit")
+                            if (confirmation) {
+                                navigate("/result")
+                            }
+                        }}>Submit Quiz</button>
+                    </div>
+                </aside>
+
+            </main>
+
+            {/* Footer removed as controls moved to main/sidebar */}
         </div>
     )
 }

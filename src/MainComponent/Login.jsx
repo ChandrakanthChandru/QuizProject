@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Router } from 'react-router-dom';
+import { Router } from 'react-router-dom'
 import { MyContext } from '../Context';
 
 const Login = () => {
@@ -33,7 +33,7 @@ const Login = () => {
   }
 
   function handleInput(e) {
-    setLogin({ ...login, [e.target.name]: e.target.value });
+    setLogin({ ...login, [e.target.name]: e.target.value });  
   }
 
   return (

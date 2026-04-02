@@ -1,42 +1,54 @@
 import React, { useContext } from 'react'
 import { MyContext } from '../Context'
+import { Link } from 'react-router-dom'
 import './Result.css'
-
 
 const Result = () => {
     let [data] = useContext(MyContext);
-    console.log(data);
+    
+    // Safety check in case data is not yet loaded or user somehow got here without taking the quiz
+    if (!data) return <div>No quiz data found.</div>;
+
+    const correctAnswers = data.filter(ele => ele.answer === ele.YourAnswer).length;
 
     return (
-        <div>
-            {data.map((ele, i) => {
-                return (
-                    <div>
-                        <div key={i} className={ele.answer == ele.YourAnswer ? "correct" : "wrong"}>
-                            <p>{ele.id}.{ele.question}</p>
-                            <div>
-                                {ele.options.map((e) => {
+        <div className="results-container">
+            <div className="score-board">
+                <h1>Quiz Results</h1>
+                <p>You scored {correctAnswers} out of {data.length}</p>
+                <Link to="/" className="home-link">Go Home</Link>
+            </div>
+            <div className="questions-list">
+                {data.map((ele, i) => {
+                    return (
+                        <div key={i} className={`result-item ${ele.answer === ele.YourAnswer ? "correct" : "wrong"}`}>
+                            <h3>{ele.id}. {ele.question}</h3>
+                            <div className="options">
+                                {ele.options.map((e, index) => {
                                     return (
-                                        <div>
+                                        <div key={index} className="option-item">
                                             <input
                                                 type="radio"
                                                 value={e}
-                                                checked={ele.yourAnswer == e ? true : false}
+                                                checked={ele.YourAnswer === e}
+                                                readOnly
                                                 disabled
                                             />
-                                            <label htmlFor="">{e}</label>
+                                            <label>{e}</label>
                                         </div>
                                     );
                                 })}
                             </div>
-                            <h5>Answer : {ele.answer}</h5>
-                            <h4>Your Answer : {ele.YourAnswer}</h4>
+                            <div className="answer-summary">
+                                <p className="correct-ans">Correct Answer: <span>{ele.answer}</span></p>
+                                <p className="user-ans">Your Answer: <span>{ele.YourAnswer || "Not Answered"}</span></p>
+                            </div>
                         </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
+            </div>
         </div>
     )
 }
 
-export default Result
+export default Result;
